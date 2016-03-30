@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/include/header.jsp"/>
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="/mysite/board">
@@ -35,8 +35,8 @@
 				</form>				
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/include/navigation.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/include/navigation.jsp"/>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
 	</div>
 </body>
 </html>
