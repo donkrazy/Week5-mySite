@@ -13,7 +13,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/main">MySite</a>
+				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		</div>

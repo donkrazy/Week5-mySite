@@ -15,14 +15,12 @@
 <link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/dashboard.css" rel="stylesheet">
 <link href="assets/css/footer.css" rel="stylesheet">
-<style type="text/css"></style>
 </head>
 <body>
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/main">MySite</a>
+				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		</div>
@@ -32,7 +30,7 @@
 			<jsp:include page="/WEB-INF/views/include/navigation.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
-					<div id="guestbook">
+					<div id="">
 						<form>
 							<div class="form-group">
 								<label for="dd">이름</label> <input type="text"
@@ -53,37 +51,34 @@
 						</form>
 
 						<table class="table table-bordered">
-							<caption><h1>방명록</h1></caption>
+							<caption>
+								<h1>방명록</h1>
+							</caption>
 							<thead>
 								<tr>
 									<th>#</th>
 									<th>Name</th>
-									<th>reg_date</th>
 									<th>message</th>
+									<th>reg_date</th>
 									<th>delete</th>
 								</tr>
 							</thead>
 							<tbody>
 								<%
-							for (GuestbookVo vo : dao.getList()) {
-						%>
+									for (GuestbookVo vo : dao.getList()) {
+								%>
 								<tr>
 									<th><%=vo.getNo()%></th>
 									<td><%=vo.getName()%></td>
+									<td><%=vo.getMessage().replaceAll("\r\n", "<br>") %></td>
 									<td><%=vo.getRegDate()%></td>
-									<td><%=vo.getMessage()%></td>
-									<td><a href="/guestbook?a=deleteform&no=<%=vo.getNo()%>"><button>삭제</button></a></td>
+									<td><a href="/guestbook?a=deleteform&no=<%=vo.getNo()%>"><button type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
 								</tr>
 								<%
-							}
-						%>
+									}
+								%>
 							</tbody>
 						</table>
-				
-
-
-
-
 					</div>
 				</div>
 			</div>

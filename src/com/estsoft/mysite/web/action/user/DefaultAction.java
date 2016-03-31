@@ -15,5 +15,4 @@ public class DefaultAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebUtil.redirect( request, response, "/main" );
 	}
-
 }

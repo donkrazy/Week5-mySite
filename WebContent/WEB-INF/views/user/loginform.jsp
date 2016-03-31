@@ -13,7 +13,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/main">MySite</a>
+				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
 			<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		</div>
@@ -26,17 +26,20 @@
 				<div class="container-fluid">
 					<div class="wrapper">
 						<div class="content">
-							<div id="site-introduction">
-								<form id="login-form" name="loginform" method="post"
-									action="/mysite/user?a=login">
-									<label class="block-label" for="email">이메일</label> <input
-										id="email" name="email" type="text" value=""> <label
-										class="block-label">패스워드</label> <input name="password"
-										type="password" value="">
-									<p>로그인이 실패 했습니다.</p>
-									<input type="submit" value="로그인">
-								</form>
-							</div>
+							<form role="form" id="login-form" name="loginform" method="post"
+								action="/user?a=login">
+								<div class="form-group">
+									<label class="block-label" for="email">이메일 <input
+										id="email" name="email" type="text" value=""></label>
+								</div>
+								<div class="form-group">
+									<label class="block-label">패스워드 <input name="password"
+										type="password" value=""></label>
+								</div>
+								<div>
+									<button class="btn btn-primary" type="submit">로그인</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
