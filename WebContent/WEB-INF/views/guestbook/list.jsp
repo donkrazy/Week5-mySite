@@ -1,11 +1,11 @@
-<%@ page import="com.estsoft.db.MySQLWebDBConnection"%>
-<%@ page import="com.estsoft.mysite.dao.GuestbookDao"%>
-<%@ page import="com.estsoft.mysite.vo.GuestbookVo"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+	pageContext.setAttribute("newLine", "\r\n");
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	GuestbookDao dao = new GuestbookDao(new MySQLWebDBConnection());
-%>
 <!doctype html>
 <html>
 <head>
@@ -22,12 +22,12 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
-			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+			<c:import url="/WEB-INF/views/include/header.jsp" />
 		</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<jsp:include page="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
 					<div id="">
@@ -64,19 +64,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%
-									for (GuestbookVo vo : dao.getList()) {
-								%>
-								<tr>
-									<th><%=vo.getNo()%></th>
-									<td><%=vo.getName()%></td>
-									<td><%=vo.getMessage().replaceAll("\r\n", "<br>") %></td>
-									<td><%=vo.getRegDate()%></td>
-									<td><a href="/guestbook?a=deleteform&no=<%=vo.getNo()%>"><button type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
-								</tr>
-								<%
-									}
-								%>
+								<c:set var="count" value="${fn:length(list) }" />
+								<c:forEach items="${list }" var="vo" varStatus="status">
+									<tr>
+										<th>${count-status.index }</th>
+										<td>${vo.name }</td>
+										<td>${fn:replace(vo.message, newLine, "<br>") }</td>
+										<td>${vo.regDate }</td>
+										<td><a href="/guestbook?a=deleteform&no=${vo.no }"><button
+													type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -84,7 +82,7 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>

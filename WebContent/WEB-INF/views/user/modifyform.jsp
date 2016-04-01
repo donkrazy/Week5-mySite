@@ -1,9 +1,8 @@
-<%@page import="com.estsoft.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	UserVo userVo = (UserVo) request.getAttribute("userVo");
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!doctype html>
 <html>
 <head>
@@ -19,13 +18,13 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
-			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+			<c:import url="/WEB-INF/views/include/header.jsp" />
 		</div>
 	</nav>
 
 	<div class="container-fluid">
 		<div class="row">
-			<jsp:include page="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="container-fluid">
 					<div class="wrapper">
@@ -36,12 +35,12 @@
 									<div class="form-group">
 										<label class="block-label" for="name">이름<input
 											class="form-control" id="name" name="name" type="text"
-											value="<%=userVo.getName()%>"></label>
+											value="${userVo.name }"></label>
 									</div>
 									<div class="form-group">
 										<label class="block-label" for="email">이메일<input
 											class="form-control" id="email" name="email" type="text"
-											value="<%=userVo.getEmail()%>"></label>
+											value="${userVo.email }"></label>
 									</div>
 									<div class="form-group">
 										<label class="block-label">비밀번호 <input
@@ -50,27 +49,22 @@
 									<div>
 										<label>성별</label>
 									</div>
-									<%
-										if ("F".equals(userVo.getGender())) {
-									%>
-									<div class="radio-inline">
-										<input type="radio" name="gender" value="F" checked="checked">여
-									</div>
-									<div class="radio-inline">
-										<input type="radio" name="gender" value="M">남
-									</div>
-									<%
-										} else {
-									%>
-									<div class="radio-inline">
-										<input type="radio" name="gender" value="F">여
-									</div>
-									<div class="radio-inline">
-										<input type="radio" name="gender" value="M" checked="checked">남
-									</div>
-									<%
-										}
-									%>
+									<c:if test="${userVo.gender == 'F' }">
+										<div class="radio-inline">
+											<input type="radio" name="gender" value="F" checked="checked">여
+										</div>
+										<div class="radio-inline">
+											<input type="radio" name="gender" value="M">남
+										</div>
+									</c:if>
+									<c:if test="${userVo.gender == 'M' }">
+										<div class="radio-inline">
+											<input type="radio" name="gender" value="F">여
+										</div>
+										<div class="radio-inline">
+											<input type="radio" name="gender" value="M" checked="checked">남
+										</div>
+									</c:if>
 									<div>
 										<button class="btn btn-primary" type="submit">수정하기</button>
 									</div>
@@ -82,7 +76,7 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
