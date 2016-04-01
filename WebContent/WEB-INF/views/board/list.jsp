@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,12 +20,12 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/main">이세돌이세돌잔치</a>
 			</div>
-			<jsp:include page="/WEB-INF/views/include/header.jsp" />
+			<c:import url="/WEB-INF/views/include/header.jsp" />
 		</div>
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<jsp:include page="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp" />
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
 					<div id="board">
@@ -70,7 +73,7 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+	<c:import url="/WEB-INF/views/include/footer.jsp"/>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
