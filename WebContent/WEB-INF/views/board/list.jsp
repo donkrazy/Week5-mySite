@@ -25,7 +25,9 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<c:import url="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp">
+				<c:param name="nav" value="board"></c:param>
+			</c:import>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
 					<div id="board">
@@ -48,7 +50,8 @@
 								<td>안대혁</td>
 								<td>3</td>
 								<td>2015-10-11 12:04:20</td>
-								<td><a href=""><button type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
+								<td><a href=""><button type="submit"
+											class="btn btn-danger btn-sm">삭제</button></a></td>
 							</tr>
 							<tr>
 								<td>2</td>
@@ -56,7 +59,8 @@
 								<td>안대혁</td>
 								<td>3</td>
 								<td>2015-10-02 12:04:12</td>
-								<td><a href=""><button type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
+								<td><a href=""><button type="submit"
+											class="btn btn-danger btn-sm">삭제</button></a></td>
 							</tr>
 							<tr>
 								<td>1</td>
@@ -64,7 +68,8 @@
 								<td>안대혁</td>
 								<td>3</td>
 								<td>2015-09-25 07:24:32</td>
-								<td><a href=""><button type="submit" class="btn btn-danger btn-sm">삭제</button></a></td>
+								<td><a href=""><button type="submit"
+											class="btn btn-danger btn-sm">삭제</button></a></td>
 							</tr>
 						</table>
 						<button type="submit" class="btn btn-default">글쓰기</button>
@@ -73,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	<c:import url="/WEB-INF/views/include/footer.jsp"/>
+	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>

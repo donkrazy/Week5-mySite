@@ -27,7 +27,9 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<c:import url="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp">
+				<c:param name="nav" value="guestbook"></c:param>
+			</c:import>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
 					<div id="">
