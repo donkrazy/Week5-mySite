@@ -18,9 +18,11 @@ public class WriteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter( "title" );
 		String content = request.getParameter( "content" );
+		Long user_no = Long.valueOf(request.getParameter("user_no"));
 		BoardVo vo = new BoardVo();
 		vo.setTitle(title);
 		vo.setContent(content);
+		vo.setUser_no(user_no);
 		BoardDao dao = new BoardDao( new MySQLWebDBConnection() );
 		dao.insert(vo);			
 		response.sendRedirect( "/board" );

@@ -30,13 +30,14 @@
 					<div class="wrapper">
 						<div class="content">
 							<div id="board" class="delete-form">
-								<form method="post" action="/board">
-									<input type="hidden" name="a" value="delete">
-									 <input	type='hidden' name="no"
-										value="${param.no }"> 
-									<button	class="btn btn-danger" type="submit">삭제하겠습니다</button>
+								<form method="post">
+									<input type="hidden" name="a" value="delete"> 
+									<input type='hidden' name="no" value="${param.no }"> 
+									<input type='hidden' name="user_no"	value="${boardVo.user_no }">
+									<button class="btn btn-danger" type="submit">삭제하겠습니다</button>
 								</form>
-								<a href="/board?a=view"><button class="btn btn-primary">돌아가기</button></a>
+								<a href="/board?a=view&no=${param.no }"><button
+										class="btn btn-primary">돌아가기</button></a>
 							</div>
 						</div>
 					</div>

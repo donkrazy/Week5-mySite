@@ -17,7 +17,6 @@ public class DefaultAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		BoardDao dao = new BoardDao( new MySQLWebDBConnection() );
 		List<BoardVo> list = dao.getList();
 		request.setAttribute( "list", list );

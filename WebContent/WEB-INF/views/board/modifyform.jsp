@@ -31,10 +31,9 @@
 				<div class="content">
 					<h1>글쓰기</h1>
 					<form>
-						<div class="form-group">
-							<input type="hidden" name="a" value="modify"> <input
-								type="hidden" name="no" value="${boardVo.no }">
-						</div>
+						<input type="hidden" name="a" value="modify"> 
+						<input type="hidden" name="no" value="${boardVo.no }">
+						<input type="hidden" name="user_no" value="${boardVo.user_no }">
 						<div class="form-group">
 							<label for="dd">제목</label> <input type="text"
 								class="form-control" name="title" value="${boardVo.title }">

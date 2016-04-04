@@ -32,6 +32,7 @@
 					<h1>글쓰기</h1>
 					<form>
 						<input type="hidden" name="a" value="write">	
+						<input type="hidden" name="user_no" value="${authUser.no }">	
 						<div class="form-group">
 							<label for="dd">제목</label> <input type="text"
 								class="form-control" name="title">

@@ -31,7 +31,14 @@
 				<div class="content">
 					<div id="">
 						<h1>게시판</h1>
-						<a href="?a=writeform"><button class="btn btn-primary">추가</button></a>
+
+						<c:if test="${authUser == null }">
+							글을 쓰고싶거든 로그인을 해라
+						</c:if>
+						<c:if test="${authUser != null }">
+							<a href="?a=writeform"><button class="btn btn-primary">추가</button></a>
+						</c:if>
+						
 						<table class="table">
 							<thead>
 								<tr>

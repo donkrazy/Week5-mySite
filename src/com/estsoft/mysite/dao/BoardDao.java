@@ -126,12 +126,12 @@ public class BoardDao {
 		PreparedStatement pstmt = null;
 		try {
 			conn = dbConnection.getConnection();
-			String sql = "INSERT INTO board VALUES( null, ?, now(), ?, 1, (select ifnull( max( group_no ), 0 ) + 1 from board as b), "
+			String sql = "INSERT INTO board VALUES( null, ?, now(), ?, ?, (select ifnull( max( group_no ), 0 ) + 1 from board as b), "
 					+ "1, 0, 0 )";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			// pstmt.setLong( 3, vo.getUser_no() );
+			pstmt.setLong( 3, vo.getUser_no() );
 			// pstmt.setLong( 4, vo.getGroup_no() );
 			// pstmt.setLong( 5, vo.getOrder_no() );
 			// pstmt.setLong( 6, vo.getDepth() );
