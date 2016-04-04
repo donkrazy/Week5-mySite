@@ -40,7 +40,6 @@ public class ModifyFormAction implements Action {
 			//WebUtil.redirect(request, response, "/board");
 			return;
 		}
-		
 		long boardNo = Long.valueOf(request.getParameter("no"));
 		BoardVo boardVo = new BoardDao(new MySQLWebDBConnection()).get(boardNo);
 		request.setAttribute("boardVo", boardVo);

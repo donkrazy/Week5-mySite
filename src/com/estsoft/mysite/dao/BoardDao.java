@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.estsoft.db.DBConnection;
 import com.estsoft.mysite.vo.BoardVo;
-import com.estsoft.mysite.vo.UserVo;
 
 public class BoardDao {
 	private DBConnection dbConnection;
@@ -26,7 +25,7 @@ public class BoardDao {
 		ResultSet rs = null;
 		try {
 			conn = dbConnection.getConnection();
-			String sql = "SELECT no, title, content, user_no, hits, reg_date FROM board WHERE no=?";
+			String sql = "SELECT no, title, content, user_no, hits, reg_date, group_no, order_no, depth FROM board WHERE no=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, boardNo);
 
@@ -38,6 +37,9 @@ public class BoardDao {
 				Long user_no = rs.getLong(4);
 				Long hits = rs.getLong(5);
 				String reg_date = rs.getString(6);
+				Long group_no = rs.getLong(7);
+				Long order_no = rs.getLong(8);
+				Long depth = rs.getLong(9);
 				boardVo = new BoardVo();
 				boardVo.setNo(no);
 				boardVo.setTitle(title);
@@ -45,6 +47,9 @@ public class BoardDao {
 				boardVo.setUser_no(user_no);
 				boardVo.setHits(hits);
 				boardVo.setRegDate(reg_date);
+				boardVo.setGroup_no(group_no);
+				boardVo.setDepth(depth);
+				boardVo.setOrder_no(order_no);
 			}
 			return boardVo;
 		} catch (SQLException e) {
@@ -127,14 +132,12 @@ public class BoardDao {
 		try {
 			conn = dbConnection.getConnection();
 			String sql = "INSERT INTO board VALUES( null, ?, now(), ?, ?, (select ifnull( max( group_no ), 0 ) + 1 from board as b), "
-					+ "1, 0, 0 )";
+					+ "1, 1, 0 )";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
 			pstmt.setLong( 3, vo.getUser_no() );
-			// pstmt.setLong( 4, vo.getGroup_no() );
-			// pstmt.setLong( 5, vo.getOrder_no() );
-			// pstmt.setLong( 6, vo.getDepth() );
+		    pstmt.setLong( 4, vo.getGroup_no() );
 			pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			System.out.println("error:" + ex);
@@ -142,6 +145,43 @@ public class BoardDao {
 			try {
 				if (pstmt != null) {
 					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	public void reply(BoardVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		try {
+			conn = dbConnection.getConnection();
+			String sql = "UPDATE board SET order_no = order_no+1 WHERE order_no >= ? and group_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, vo.getOrder_no());
+			pstmt.setLong(2, vo.getGroup_no());
+			pstmt.executeUpdate();
+			String sql2 = "INSERT INTO board VALUES( null, ?, now(), ?, ?, ?, ?, ?, 1)";
+			pstmt2 = conn.prepareStatement(sql2);
+			pstmt2.setString(1, vo.getTitle());
+			pstmt2.setString(2, vo.getContent());
+			pstmt2.setLong( 3, vo.getUser_no() );
+		    pstmt2.setLong( 4, vo.getGroup_no() );
+			pstmt2.setLong( 5, vo.getOrder_no() );
+			pstmt2.setLong( 6, vo.getDepth() );
+			pstmt2.executeUpdate();
+		} catch (SQLException ex) {
+			System.out.println("error:" + ex);
+		} finally {
+			try {
+				if (pstmt != null && pstmt2!= null) {
+					pstmt.close();
+					pstmt2.close();
 				}
 				if (conn != null) {
 					conn.close();
@@ -188,7 +228,7 @@ public class BoardDao {
 			conn = dbConnection.getConnection();
 			stmt = conn.createStatement();
 			String sql = "SELECT no, title, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), content"
-					+ " content, user_no, group_no, order_no, depth, hits from board ORDER BY reg_date desc";
+					+ " content, user_no, group_no, order_no, depth, hits from board ORDER BY group_no desc, order_no";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Long no = rs.getLong(1);

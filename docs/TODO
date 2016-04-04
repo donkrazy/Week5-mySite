@@ -1,2 +1,6 @@
 pager
-계층형
+검색
+
+
+
+form action="/board" 로 초기화 해야함. 안하면 이전 url parameter 남아있다

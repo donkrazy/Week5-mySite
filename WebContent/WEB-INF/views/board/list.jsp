@@ -38,7 +38,7 @@
 						<c:if test="${authUser != null }">
 							<a href="?a=writeform"><button class="btn btn-primary">추가</button></a>
 						</c:if>
-						
+
 						<table class="table">
 							<thead>
 								<tr>
@@ -46,16 +46,28 @@
 									<th>글쓴이</th>
 									<th>reg_date</th>
 									<th>조회수</th>
+									<th>group_no</th>
+									<th>order_no</th>
+									<th>depth</th>
+
 								</tr>
 							</thead>
 							<tbody>
 								<c:set var="count" value="${fn:length(list) }" />
 								<c:forEach items="${list }" var="vo" varStatus="status">
 									<tr>
-										<td><a href="?a=view&no=${vo.no }">${vo.title}</a></td>
+										<td>
+											<c:forEach begin="1" end="${vo.depth }" varStatus="loop">
+												<img src="/assets/images/reply.png"></img>
+											</c:forEach> 
+											<a href="?a=view&no=${vo.no }">${vo.title}</a>
+										</td>
 										<td>${vo.user_no }</td>
 										<td>${vo.regDate }</td>
 										<td>${vo.hits }</td>
+										<td>${vo.group_no }</td>
+										<td>${vo.order_no }</td>
+										<td>${vo.depth }</td>
 									</tr>
 								</c:forEach>
 							</tbody>

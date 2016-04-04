@@ -49,12 +49,15 @@
 
 				<c:choose>
 					<c:when test="${authUser == null }">
-						글을 수정하고 싶거든 로그인을 해라
+						로그인을 해라
 					</c:when>
 					<c:when test="${authUser.no != boardVo.user_no }">
-						자기 글에다 수정해라
+						<a href="/board?a=replyform&no=${boardVo.no }&user_no=${boardVo.user_no }"><button
+								type="submit" class="btn btn-primary">답글 달기</button></a>
 					</c:when>
 					<c:when test="${authUser.no == boardVo.user_no }">
+						<a href="/board?a=replyform&no=${boardVo.no }&user_no=${boardVo.user_no }"><button
+								type="submit" class="btn btn-primary">답글 달기</button></a>
 						<a href="/board?a=modifyform&no=${boardVo.no }&user_no=${boardVo.user_no }"><button
 								type="submit" class="btn btn-primary">수정</button></a>
 						<a href="/board?a=deleteform&no=${boardVo.no }&user_no=${boardVo.user_no }"><button

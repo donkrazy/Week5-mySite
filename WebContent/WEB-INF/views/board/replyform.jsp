@@ -1,16 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
 <head>
-<title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mySite</title>
 <link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/dashboard.css" rel="stylesheet">
 <link href="assets/css/footer.css" rel="stylesheet">
-<style type="text/css"></style>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -21,31 +22,33 @@
 			<c:import url="/WEB-INF/views/include/header.jsp" />
 		</div>
 	</nav>
-
 	<div class="container-fluid">
 		<div class="row">
-			<c:import url="/WEB-INF/views/include/navigation.jsp" />
+			<c:import url="/WEB-INF/views/include/navigation.jsp">
+				<c:param name="nav" value="board"></c:param>
+			</c:import>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div class="container-fluid">
-					<div class="wrapper">
-						<div class="content">
-							<div id="board" class="delete-form">
-								<form method="post" action="/board">
-									<input type="hidden" name="a" value="delete"> 
-									<input type='hidden' name="no" value="${param.no }"> 
-									<input type='hidden' name="user_no"	value="${boardVo.user_no }">
-									<button class="btn btn-danger" type="submit">삭제하겠습니다</button>
-								</form>
-								<a href="/board?a=view&no=${param.no }"><button
-										class="btn btn-primary">돌아가기</button></a>
-							</div>
+				<div class="content">
+					<h1>답글달기</h1>
+					<form>
+						<input type="hidden" name="a" value="reply">	
+						<input type="hidden" name="user_no" value="${boardVo.user_no }">	
+						<input type="hidden" name="no" value="${boardVo.no }">	
+						<div class="form-group">
+							<label for="dd">제목</label> <input type="text"
+								class="form-control" name="title">
 						</div>
-					</div>
+						<div class="form-group">
+							<label for="ttextfield">내용</label>
+							<textarea class="form-control" name="content" cols=60 rows=5></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">제출</button>
+						<a href="/board"><button type="submit" class="btn btn-danger">취소</button></a>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
