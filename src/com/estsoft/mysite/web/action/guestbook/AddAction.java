@@ -27,6 +27,5 @@ public class AddAction implements Action {
 		GuestbookDao dao = new GuestbookDao( new MySQLWebDBConnection() );
 		dao.insert(vo);			
 		response.sendRedirect( "/guestbook" );
-
 	}
 }

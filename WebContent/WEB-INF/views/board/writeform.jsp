@@ -29,31 +29,20 @@
 			</c:import>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
-					<div id="">
-						<h1>게시판</h1>
-						<a href="?a=writeform"><button class="btn btn-primary">추가</button></a>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>제목</th>
-									<th>글쓴이</th>
-									<th>reg_date</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:set var="count" value="${fn:length(list) }" />
-								<c:forEach items="${list }" var="vo" varStatus="status">
-									<tr>
-										<td><a href="?a=view&no=${vo.no }">${vo.title}</a></td>
-										<td>${vo.user_no }</td>
-										<td>${vo.regDate }</td>
-										<td>${vo.hits }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
+					<h1>글쓰기</h1>
+					<form>
+						<input type="hidden" name="a" value="write">	
+						<div class="form-group">
+							<label for="dd">제목</label> <input type="text"
+								class="form-control" name="title">
+						</div>
+						<div class="form-group">
+							<label for="ttextfield">내용</label>
+							<textarea class="form-control" name="content" cols=60 rows=5></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">제출</button>
+						<a href="/board"><button type="submit" class="btn btn-danger">취소</button></a>
+					</form>
 				</div>
 			</div>
 		</div>

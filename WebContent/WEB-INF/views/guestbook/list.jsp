@@ -33,29 +33,8 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
 					<div id="">
-						<form>
-							<div class="form-group">
-								<label for="dd">이름</label> <input type="text"
-									class="form-control" name="name">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">비밀번호</label> <input
-									type="password" class="form-control" name="password">
-							</div>
-							<div class="form-group">
-								<label for="ttextfield">하고싶은말</label>
-								<textarea class="form-control" name="message" cols=60 rows=5></textarea>
-							</div>
-							<div class="form-group">
-								<input type="hidden" name="a" value="add">
-							</div>
-							<button type="submit" class="btn btn-default">제출</button>
-						</form>
-
+						<h1>방명록</h1>
 						<table class="table table-bordered">
-							<caption>
-								<h1>방명록</h1>
-							</caption>
 							<thead>
 								<tr>
 									<th>#</th>
@@ -79,6 +58,26 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<hr>
+						<h2>글 남기기</h2>
+						<form>
+							<div class="form-group">
+								<label for="dd">이름</label> <input type="text"
+									class="form-control" name="name">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">비밀번호</label> <input
+									type="password" class="form-control" name="password">
+							</div>
+							<div class="form-group">
+								<label for="ttextfield">하고싶은말</label>
+								<textarea class="form-control" name="message" cols=60 rows=5></textarea>
+							</div>
+							<div class="form-group">
+								<input type="hidden" name="a" value="add">
+							</div>
+							<button type="submit" class="btn btn-default">제출</button>
+						</form>
 					</div>
 				</div>
 			</div>
