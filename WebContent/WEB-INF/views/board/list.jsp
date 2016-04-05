@@ -29,51 +29,65 @@
 			</c:import>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="content">
-					<div id="">
-						<h1>게시판</h1>
-
-						<c:if test="${authUser == null }">
+					<font size="20">게시판</font> <span style="float: right"> <c:if
+							test="${authUser == null }">
 							글을 쓰고싶거든 로그인을 해라
+						</c:if> <c:if test="${authUser != null }">
+							<a href="?a=writeform"><button class="btn btn-primary btn-lg">추가</button></a>
 						</c:if>
-						<c:if test="${authUser != null }">
-							<a href="?a=writeform"><button class="btn btn-primary">추가</button></a>
-						</c:if>
+					</span>
 
-						<table class="table">
-							<thead>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>제목</th>
+								<th>글쓴이</th>
+								<th>reg_date</th>
+								<th>조회수</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<c:set var="count" value="${fn:length(list) }" />
+							<c:forEach items="${list }" var="vo" varStatus="status">
 								<tr>
-									<th>제목</th>
-									<th>글쓴이</th>
-									<th>reg_date</th>
-									<th>조회수</th>
-									<th>group_no</th>
-									<th>order_no</th>
-									<th>depth</th>
-
+									<td><c:forEach begin="1" end="${vo.depth }"
+											varStatus="loop">
+											<img src="/assets/images/reply.png"></img>
+										</c:forEach> <a href="?a=view&no=${vo.no }">${vo.title}</a></td>
+									<td>${userDao.getUserName(vo.user_no) }</td>
+									<td>${vo.regDate }</td>
+									<td>${vo.hits }</td>
 								</tr>
-							</thead>
-							<tbody>
-								<c:set var="count" value="${fn:length(list) }" />
-								<c:forEach items="${list }" var="vo" varStatus="status">
-									<tr>
-										<td>
-											<c:forEach begin="1" end="${vo.depth }" varStatus="loop">
-												<img src="/assets/images/reply.png"></img>
-											</c:forEach> 
-											<a href="?a=view&no=${vo.no }">${vo.title}</a>
-										</td>
-										<td>${vo.user_no }</td>
-										<td>${vo.regDate }</td>
-										<td>${vo.hits }</td>
-										<td>${vo.group_no }</td>
-										<td>${vo.order_no }</td>
-										<td>${vo.depth }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="pager">
+					<div style="text-align: center;">
+						<nav>
+							<ul class="pagination">
+								<li class="page-item disabled"><a class="page-link"
+									href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">Previous</span>
+								</a></li>
+								<li class="page-item active"><a class="page-link" href="#">1
+										<span class="sr-only">(current)</span>
+								</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item"><a class="page-link" href="#">4</a></li>
+								<li class="page-item"><a class="page-link" href="#">5</a></li>
+								<li class="page-item"><a class="page-link" href="#"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">Next</span>
+								</a></li>
+							</ul>
+						</nav>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>

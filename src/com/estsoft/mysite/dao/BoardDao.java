@@ -228,7 +228,10 @@ public class BoardDao {
 			conn = dbConnection.getConnection();
 			stmt = conn.createStatement();
 			String sql = "SELECT no, title, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), content"
-					+ " content, user_no, group_no, order_no, depth, hits from board ORDER BY group_no desc, order_no";
+					+ " content, user_no, group_no, order_no, depth, hits "+
+					"from board ORDER BY group_no desc, order_no";
+//			String sql = "SELECT b.no, title, DATE_FORMAT( b.reg_date, '%Y-%m-%d %p %h:%i:%s' ), content, user_no, group_no, order_no, depth, hits, u.name "
+//					+ "from board b, user u where b.user_no=u.no ORDER BY group_no desc, order_no";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Long no = rs.getLong(1);
@@ -271,8 +274,36 @@ public class BoardDao {
 				ex.printStackTrace();
 			}
 		}
-
 		return list;
 	}
+	
+	public void getUserName(BoardVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dbConnection.getConnection();
+			// String sql = "DELETE FROM board WHERE no = ? AND user_no = ?";
+			String sql = "DELETE FROM board WHERE no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, vo.getNo());
+			// pstmt.setLong( 2, vo.getUser_no() );
+			pstmt.executeUpdate();
+		} catch (SQLException ex) {
+			System.out.println("error:" + ex);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	
 
 }

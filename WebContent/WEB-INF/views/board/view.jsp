@@ -37,7 +37,7 @@
 						<div class="panel-heading">
 							<div class="panel-title">${boardVo.title }
 								<span style="float: right"><h5>유저이름:
-										${boardVo.user_no } 작성일: ${boardVo.regDate } 조회수:
+										${name } 작성일: ${boardVo.regDate } 조회수:
 										${boardVo.hits }</h5></span>
 
 							</div>

@@ -185,4 +185,40 @@ public class UserDao {
 			}
 		}
 	}
+	
+	public String getUserName( Long userNo ) {
+		String name = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = dbConnection.getConnection();
+			String sql = "SELECT name FROM user WHERE no=?"; 
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setLong( 1, userNo );
+
+			rs = pstmt.executeQuery();
+			if( rs.next() ) {
+				name = rs.getString( 1 );
+			}
+			return name;
+		} catch (SQLException e) {
+			System.out.println( "error:" + e );
+			return null;
+		} finally {
+			try{
+				if( rs != null ) {
+					rs.close();
+				}
+				if( pstmt != null ) {
+					pstmt.close();
+				}
+				if( conn != null ) {
+					conn.close();
+				}
+			}catch( SQLException e ) {
+				e.printStackTrace();
+			}
+		}
+	}	
 }
