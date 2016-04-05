@@ -29,8 +29,7 @@ public class JoinAction implements Action {
 		
 		UserDao dao = new UserDao( new MySQLWebDBConnection() );
 		dao.insert(vo);
-		
-		WebUtil.redirect(request, response, "/user?a=joinsuccess");
+		response.sendRedirect("/user?a=joinsuccess");
 	}
 
 }

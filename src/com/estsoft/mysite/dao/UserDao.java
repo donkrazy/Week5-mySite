@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.estsoft.db.DBConnection;
+import com.estsoft.db.DBUtils;
 import com.estsoft.mysite.vo.UserVo;
 
 public class UserDao {
@@ -45,19 +46,7 @@ public class UserDao {
 			System.out.println( "error:" + e );
 			return null;
 		} finally {
-			try{
-				if( rs != null ) {
-					rs.close();
-				}
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException e ) {
-				e.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt, rs);
 		}
 	}	
 
@@ -76,8 +65,7 @@ public class UserDao {
 		ResultSet rs = null;
 		try {
 			conn = dbConnection.getConnection();
-			String sql = 
-	"SELECT no, name, email FROM user WHERE email=? AND passwd=password(?)"; 
+			String sql = "SELECT no, name, email FROM user WHERE email=? AND passwd=password(?)"; 
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, vo.getEmail() );
 			pstmt.setString( 2, vo.getPassword() );
@@ -98,19 +86,7 @@ public class UserDao {
 			System.out.println( "error:" + e );
 			return null;
 		} finally {
-			try{
-				if( rs != null ) {
-					rs.close();
-				}
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException e ) {
-				e.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt, rs);
 		}
 	}
 
@@ -142,16 +118,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			System.out.println( "error:" + e );	
 		} finally {
-			try{
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException e ) {
-				e.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt);
 		}
 	}
 	
@@ -173,16 +140,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			System.out.println( "error:" + e );	
 		} finally {
-			try{
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException e ) {
-				e.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt);
 		}
 	}
 	
@@ -206,19 +164,7 @@ public class UserDao {
 			System.out.println( "error:" + e );
 			return null;
 		} finally {
-			try{
-				if( rs != null ) {
-					rs.close();
-				}
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException e ) {
-				e.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt, rs);
 		}
 	}	
 }

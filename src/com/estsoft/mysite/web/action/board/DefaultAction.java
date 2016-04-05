@@ -19,11 +19,24 @@ public class DefaultAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDao dao = new BoardDao( new MySQLWebDBConnection() );
-		List<BoardVo> list = dao.getList();
 		UserDao userDao =  new UserDao(new MySQLWebDBConnection());
+		int page = 0;
+		if(request.getParameter("page") == null){
+			response.sendRedirect("/board?page=1");
+			return;
+		}
+		else{
+			page = Integer.valueOf(request.getParameter("page"));
+		}
+		List<BoardVo> list = null;
+		if(page==0){
+			list = dao.getList();
+		}
+		else{
+			list = dao.getList(page);
+		}
 		request.setAttribute( "list", list );
 		request.setAttribute( "userDao", userDao );
 		WebUtil.forward( request, response, "/WEB-INF/views/board/list.jsp" );
 	}
-
 }

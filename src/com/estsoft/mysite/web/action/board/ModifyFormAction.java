@@ -26,7 +26,6 @@ public class ModifyFormAction implements Action {
 			response.setContentType( "text/html; charset=utf-8" );
 			PrintWriter out = response.getWriter();
 			out.println(message);
-			//WebUtil.redirect(request, response, "/board");
 			return;
 		}
 		
@@ -37,7 +36,6 @@ public class ModifyFormAction implements Action {
 			response.setContentType( "text/html; charset=utf-8" );
 			PrintWriter out = response.getWriter();
 			out.println(message);
-			//WebUtil.redirect(request, response, "/board");
 			return;
 		}
 		long boardNo = Long.valueOf(request.getParameter("no"));

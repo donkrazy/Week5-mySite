@@ -16,11 +16,11 @@ public class LogoutAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if( session == null ) {
-			WebUtil.redirect(request, response, "/main");
+			response.sendRedirect("/main");
 			return;
 		}
 		session.removeAttribute( "authUser" );
 		session.invalidate();
-		WebUtil.redirect(request, response, "/main");
+		response.sendRedirect("/main");
 	}
 }

@@ -29,6 +29,6 @@ public class LoginAction implements Action {
 		//인증 성공 (로그인처리)
 		HttpSession session = request.getSession( true );
 		session.setAttribute( "authUser", authUser );
-		WebUtil.redirect(request, response, "/main" );
+		response.sendRedirect("/main" );
 	}
 }

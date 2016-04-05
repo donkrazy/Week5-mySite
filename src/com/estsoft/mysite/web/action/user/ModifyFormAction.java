@@ -19,16 +19,15 @@ public class ModifyFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session == null) {
-			WebUtil.redirect(request, response, "/main");
+			response.sendRedirect("/main");
 			return;
 		}
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
-			WebUtil.redirect(request, response, "/main");
+			response.sendRedirect("/main");
 			return;
 		}
-
 		UserDao dao = new UserDao(new MySQLWebDBConnection());
 		UserVo userVo = dao.get(authUser.getNo());
 

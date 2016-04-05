@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.estsoft.db.DBConnection;
+import com.estsoft.db.DBUtils;
 import com.estsoft.mysite.vo.GuestbookVo;
 
 public class GuestbookDao {
@@ -32,16 +33,7 @@ public class GuestbookDao {
 		} catch( SQLException ex ) {
 			System.out.println( "error:" + ex );
 		} finally {
-			try{
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException ex ) {
-				ex.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt);
 		}
 	}
 	
@@ -58,16 +50,7 @@ public class GuestbookDao {
 		} catch( SQLException ex ) {
 			System.out.println( "error:" + ex );
 		} finally {
-			try{
-				if( pstmt != null ) {
-					pstmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException ex ) {
-				ex.printStackTrace();
-			}
+			DBUtils.clean_up(conn, pstmt);
 		}
 	}
 	
@@ -96,19 +79,7 @@ public class GuestbookDao {
 		} catch( SQLException ex ) {
 			System.out.println( "error: " + ex);
 		} finally {
-			try{
-				if( rs != null ) {
-					rs.close();
-				}
-				if( stmt != null ) {
-					stmt.close();
-				}
-				if( conn != null ) {
-					conn.close();
-				}
-			}catch( SQLException ex ) {
-				ex.printStackTrace();
-			}
+			DBUtils.clean_up(conn, stmt, rs);
 		}
 			
 		return list;

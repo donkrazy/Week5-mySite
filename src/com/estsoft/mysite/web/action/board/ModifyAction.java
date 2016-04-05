@@ -45,7 +45,7 @@ public class ModifyAction implements Action {
 		boardVo.setUser_no(user_no);
 		BoardDao dao = new BoardDao(new MySQLWebDBConnection());
 		dao.update(boardVo);
-		WebUtil.redirect(request, response, "/board?a=view&no="+no);
+		response.sendRedirect("/board?a=view&no="+no);
 	}
 
 }

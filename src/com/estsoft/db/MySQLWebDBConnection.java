@@ -12,7 +12,6 @@ public class MySQLWebDBConnection implements DBConnection {
 		try {
 			//1. 드라이버 로드
 			Class.forName( "com.mysql.jdbc.Driver" );
-
 			//2. Connection 얻기
 			String url = "jdbc:mysql://localhost/webdb";
 			conn = DriverManager.getConnection( url, "webdb", "webdb" );

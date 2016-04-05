@@ -25,11 +25,8 @@ public class WriteFormAction implements Action {
 			response.setContentType( "text/html; charset=utf-8" );
 			PrintWriter out = response.getWriter();
 			out.println(message);
-			//WebUtil.redirect(request, response, "/board");
 			return;
 		}
 		WebUtil.forward( request, response, "/WEB-INF/views/board/writeform.jsp" );
 	}
-
-
 }

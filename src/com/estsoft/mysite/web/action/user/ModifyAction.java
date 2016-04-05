@@ -19,12 +19,12 @@ public class ModifyAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session == null) {
-			WebUtil.redirect(request, response, "/main");
+			response.sendRedirect("/main");
 			return;
 		}
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
-			WebUtil.redirect(request, response, "/main");
+			response.sendRedirect("/main");
 			return;
 		}
 
@@ -48,6 +48,6 @@ public class ModifyAction implements Action {
 		authUser.setName(name);
 
 		// 리다이렉트
-		WebUtil.redirect(request, response, "/");
+		response.sendRedirect("/main");
 	}
 }

@@ -18,7 +18,7 @@ public class ViewAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if( null == request.getParameter("no") ){
-			WebUtil.redirect(request, response, "/board");
+			response.sendRedirect("/board");
 		}
 		long boardNo = Long.valueOf(request.getParameter("no"));
 		BoardDao boardDao = new BoardDao(new MySQLWebDBConnection());
