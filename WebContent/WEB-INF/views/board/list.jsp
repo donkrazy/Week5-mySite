@@ -68,21 +68,27 @@
 					<div style="text-align: center;">
 						<nav>
 							<ul class="pagination">
-								<li class="page-item disabled"><a class="page-link"
-									href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-										<span class="sr-only">Previous</span>
-								</a></li>
-								<li class="page-item active"><a class="page-link" href="/board?page=1">1
-										<span class="sr-only">(current)</span>
-								</a></li>
-								<li class="page-item"><a class="page-link" href="/board?page=2">2</a></li>
-								<li class="page-item"><a class="page-link" href="/board?page=3">3</a></li>
-								<li class="page-item"><a class="page-link" href="/board?page=4">4</a></li>
-								<li class="page-item"><a class="page-link" href="/board?page=5">5</a></li>
-								<li class="page-item"><a class="page-link" href="#"
-									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-										<span class="sr-only">Next</span>
-								</a></li>
+								<c:if test="${param.head!=0 }"> 
+									<li class="page-item">
+										<a class="page-link" href="/board?head=${param.head-1 }" aria-label="Previous"> 
+											<span aria-hidden="true">&laquo;</span>
+											<span class="sr-only">Previous</span>
+										</a>
+									</li>
+								</c:if>
+								<c:forEach begin="${starts }" end="${ends }" varStatus="loop">
+									<li class="page-item <c:if test="${loop.index == param.page }"> active</c:if>">
+										<a class="page-link" href="/board?page=${loop.index }&head=${param.head }">${loop.index }</a>
+									</li>
+								</c:forEach>
+								<c:if test="${param.head%5 ==0 }"> 
+									<li class="page-item">
+										<a class="page-link" href="/board?head=${param.head+1 }" aria-label="Next"> 
+											<span aria-hidden="true">&raquo;</span>
+											<span class="sr-only">Next</span>
+										</a>
+									</li>
+								</c:if>
 							</ul>
 						</nav>
 					</div>
@@ -92,8 +98,7 @@
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 </body>
 </html>

@@ -60,7 +60,7 @@ public class BoardDao {
 			DBUtils.clean_up(conn, pstmt, rs);
 		}
 	}
-	
+
 	public void incrementHits(BoardVo BoardVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -103,12 +103,12 @@ public class BoardDao {
 		try {
 			conn = dbConnection.getConnection();
 			String sql = "INSERT INTO board VALUES( null, ?, now(), ?, ?, (select ifnull( max( group_no ), 0 ) + 1 from board as b), "
-					+ "1, 1, 0 )";
+					+ "1, 0, 0 )";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setLong( 3, vo.getUser_no() );
-		    pstmt.setLong( 4, vo.getGroup_no() );
+			pstmt.setLong(3, vo.getUser_no());
+			//pstmt.setLong(4, vo.getGroup_no());
 			pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			System.out.println("error:" + ex);
@@ -116,7 +116,7 @@ public class BoardDao {
 			DBUtils.clean_up(conn, pstmt);
 		}
 	}
-	
+
 	public void reply(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -132,10 +132,10 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContent());
-			pstmt.setLong( 3, vo.getUser_no() );
-		    pstmt.setLong( 4, vo.getGroup_no() );
-			pstmt.setLong( 5, vo.getOrder_no() );
-			pstmt.setLong( 6, vo.getDepth() );
+			pstmt.setLong(3, vo.getUser_no());
+			pstmt.setLong(4, vo.getGroup_no());
+			pstmt.setLong(5, vo.getOrder_no());
+			pstmt.setLong(6, vo.getDepth());
 			pstmt.executeUpdate();
 		} catch (SQLException ex) {
 			System.out.println("error:" + ex);
@@ -171,10 +171,13 @@ public class BoardDao {
 			conn = dbConnection.getConnection();
 			stmt = conn.createStatement();
 			String sql = "SELECT no, title, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), content"
-					+ " content, user_no, group_no, order_no, depth, hits "+
-					"from board ORDER BY group_no desc, order_no";
-//			String sql = "SELECT b.no, title, DATE_FORMAT( b.reg_date, '%Y-%m-%d %p %h:%i:%s' ), content, user_no, group_no, order_no, depth, hits, u.name "
-//					+ "from board b, user u where b.user_no=u.no ORDER BY group_no desc, order_no";
+					+ " content, user_no, group_no, order_no, depth, hits "
+					+ "from board ORDER BY group_no desc, order_no";
+			// String sql = "SELECT b.no, title, DATE_FORMAT( b.reg_date,
+			// '%Y-%m-%d %p %h:%i:%s' ), content, user_no, group_no, order_no,
+			// depth, hits, u.name "
+			// + "from board b, user u where b.user_no=u.no ORDER BY group_no
+			// desc, order_no";
 			rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				Long no = rs.getLong(1);
@@ -207,9 +210,9 @@ public class BoardDao {
 		}
 		return list;
 	}
-	
+
 	public List<BoardVo> getList(int page) {
-		int UNITS_PER_PAGE = 4;
+		int UNITS_PER_PAGE = 3;
 		List<BoardVo> list = new ArrayList<BoardVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -217,11 +220,10 @@ public class BoardDao {
 		try {
 			conn = dbConnection.getConnection();
 			String sql = "SELECT no, title, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), content"
-					+ " content, user_no, group_no, order_no, depth, hits "+
-					"from board ORDER BY group_no desc, order_no " +
-					"limit ?, ?";
+					+ " content, user_no, group_no, order_no, depth, hits "
+					+ "from board ORDER BY group_no desc, order_no " + "limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (page-1)*UNITS_PER_PAGE);
+			pstmt.setInt(1, (page - 1) * UNITS_PER_PAGE);
 			pstmt.setInt(2, UNITS_PER_PAGE);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -255,7 +257,7 @@ public class BoardDao {
 		}
 		return list;
 	}
-	
+
 	public void getUserName(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -273,7 +275,26 @@ public class BoardDao {
 			DBUtils.clean_up(conn, pstmt);
 		}
 	}
-	
-	
+
+	public int getLength() {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		int length = 0;
+		try {
+			conn = dbConnection.getConnection();
+			stmt = conn.createStatement();
+			String sql = "select count(*) from board";
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				length = rs.getInt(1);
+			}
+		} catch (SQLException ex) {
+			System.out.println("error: " + ex);
+		} finally {
+			DBUtils.clean_up(conn, stmt, rs);
+		}
+		return length;
+	}
 
 }

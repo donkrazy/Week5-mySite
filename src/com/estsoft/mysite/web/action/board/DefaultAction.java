@@ -21,22 +21,26 @@ public class DefaultAction implements Action {
 		BoardDao dao = new BoardDao( new MySQLWebDBConnection() );
 		UserDao userDao =  new UserDao(new MySQLWebDBConnection());
 		int page = 0;
-		if(request.getParameter("page") == null){
-			response.sendRedirect("/board?page=1");
+		int head = 0;
+		int UNITS_PER_PAGE = 3;
+		if(request.getParameter("head") == null){
+			response.sendRedirect("/board?head=0");
 			return;
 		}
-		else{
-			page = Integer.valueOf(request.getParameter("page"));
+		head = Integer.valueOf(request.getParameter("head"));
+		if(request.getParameter("page") == null){
+			response.sendRedirect("/board?head="+head+"&page="+(head*5+1));
+			return;
 		}
-		List<BoardVo> list = null;
-		if(page==0){
-			list = dao.getList();
-		}
-		else{
-			list = dao.getList(page);
-		}
+		page = Integer.valueOf(request.getParameter("page"));
+		List<BoardVo> list =dao.getList(page);
+		int pageNum = dao.getLength()/UNITS_PER_PAGE + 1;
+		int starts = 5*head +1;
+		int ends = (pageNum>5*(head+1))? 5*(head+1) : pageNum;
 		request.setAttribute( "list", list );
 		request.setAttribute( "userDao", userDao );
+		request.setAttribute("starts", starts);
+		request.setAttribute("ends", ends);
 		WebUtil.forward( request, response, "/WEB-INF/views/board/list.jsp" );
 	}
 }
