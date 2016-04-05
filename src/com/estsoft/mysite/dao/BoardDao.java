@@ -257,6 +257,55 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	public List<BoardVo> getList(int page, String kwd) {
+		int UNITS_PER_PAGE = 3;
+		List<BoardVo> list = new ArrayList<BoardVo>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = dbConnection.getConnection();
+			String sql = "SELECT no, title, DATE_FORMAT( reg_date, '%Y-%m-%d %p %h:%i:%s' ), content, "
+					+ "user_no, group_no, order_no, depth, hits "
+					+ "from board where title like '%" + kwd + "%' or content like '%" + kwd + "%' "
+					+ "ORDER BY group_no desc, order_no "
+					+ "limit ?, ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, (page - 1) * UNITS_PER_PAGE);
+			pstmt.setInt(2, UNITS_PER_PAGE);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Long no = rs.getLong(1);
+				String title = rs.getString(2);
+				String regDate = rs.getString(3);
+				String content = rs.getString(4);
+				Long user_no = rs.getLong(5);
+				Long group_no = rs.getLong(6);
+				Long order_no = rs.getLong(7);
+				Long depth = rs.getLong(8);
+				Long hits = rs.getLong(9);
+
+				BoardVo vo = new BoardVo();
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setRegDate(regDate);
+				vo.setContent(content);
+				vo.setUser_no(user_no);
+				vo.setGroup_no(group_no);
+				vo.setOrder_no(order_no);
+				vo.setDepth(depth);
+				vo.setHits(hits);
+
+				list.add(vo);
+			}
+		} catch (SQLException ex) {
+			System.out.println("error: " + ex);
+		} finally {
+			DBUtils.clean_up(conn, pstmt, rs);
+		}
+		return list;
+	}
 
 	public void getUserName(BoardVo vo) {
 		Connection conn = null;
@@ -291,6 +340,27 @@ public class BoardDao {
 			}
 		} catch (SQLException ex) {
 			System.out.println("error: " + ex);
+		} finally {
+			DBUtils.clean_up(conn, stmt, rs);
+		}
+		return length;
+	}
+	
+	public int getLength(String kwd) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		int length = 0;
+		try {
+			conn = dbConnection.getConnection();
+			String sql = "select count(*) from board where title like '%"+kwd+"%' or content like '%"+kwd+"%'";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				length = rs.getInt(1);
+			}
+		} catch (SQLException ex) {
+			System.out.println("에러: " + ex);
 		} finally {
 			DBUtils.clean_up(conn, stmt, rs);
 		}

@@ -64,30 +64,35 @@
 					</table>
 				</div>
 
+				<form class="navbar-form" method="POST" action="/board?head=${param.head }&page=${param.page }">
+					<div class="form-group">
+						<input placeholder="게시물 검색" class="form-control" type="text" name="kwd">
+					</div>
+					<button type="submit" class="btn btn-success">Search</button>
+				</form>
+
 				<div class="pager">
 					<div style="text-align: center;">
 						<nav>
 							<ul class="pagination">
-								<c:if test="${param.head!=0 }"> 
-									<li class="page-item">
-										<a class="page-link" href="/board?head=${param.head-1 }" aria-label="Previous"> 
-											<span aria-hidden="true">&laquo;</span>
-											<span class="sr-only">Previous</span>
-										</a>
-									</li>
+								<c:if test="${param.head!=0 }">
+									<li class="page-item"><a class="page-link"
+										href="/board?head=${param.head-1 }" aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
+									</a></li>
 								</c:if>
 								<c:forEach begin="${starts }" end="${ends }" varStatus="loop">
-									<li class="page-item <c:if test="${loop.index == param.page }"> active</c:if>">
-										<a class="page-link" href="/board?page=${loop.index }&head=${param.head }">${loop.index }</a>
+									<li
+										class="page-item <c:if test="${loop.index == param.page }"> active</c:if>">
+										<a class="page-link"
+										href="/board?page=${loop.index }&head=${param.head }&kwd=${param.kwd }">${loop.index }</a>
 									</li>
 								</c:forEach>
-								<c:if test="${param.head%5 ==0 }"> 
-									<li class="page-item">
-										<a class="page-link" href="/board?head=${param.head+1 }" aria-label="Next"> 
-											<span aria-hidden="true">&raquo;</span>
-											<span class="sr-only">Next</span>
-										</a>
-									</li>
+								<c:if test="${param.head%5 ==0 }">
+									<li class="page-item"><a class="page-link"
+										href="/board?head=${param.head+1 }&kwd=${param.kwd }" aria-label="Next"> <span
+											aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
+									</a></li>
 								</c:if>
 							</ul>
 						</nav>
@@ -98,7 +103,8 @@
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 </body>
 </html>
