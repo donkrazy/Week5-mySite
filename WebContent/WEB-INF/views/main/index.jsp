@@ -34,15 +34,19 @@
 				<h1 class="page-header">인공지능의 도전</h1>
 				<div class="row placeholders">
 					<div class="col-xs-6 col-sm-3 ">
-		              <img src="/assets/images/kickscar_profile.jpg" class="img-responsive" alt="alphago" height="200" width="500">
+		              <img src="/assets/images/kickscar_profile.jpg" class="img-responsive" alt="alphago" height="200">
+		             
 		              <h4>AlphaGO</h4>
 		            </div>
-		            <div class="col-xs-6 col-sm-3 ">
-		              <img src="/assets/images/sedol.jpg" class="img-responsive" alt="sedol" height="200" width="500">
+		            <div class="col-xs-6 col-sm-5 ">
+			             <!-- 
+			              <img src="/assets/images/sedol.gif" class="img-responsive" alt="sedol" height="200" width="500">
+			             -->
+		               <img src=https://giant.gfycat.com/ColorfulImmediateIchneumonfly.gif class="img-responsive" alt="alphago" height="200">
 		              <h4>Sedol Lee</h4>
 		            </div>
 		            <div class="col-xs-6 col-sm-3 ">
-		              <img src="/assets/images/deepmind.png" class="img-responsive" alt="alphago" height="200" width="500">
+		              <img src="/assets/images/deepmind.png" class="img-responsive" alt="alphago" height="200">
 		              <h4>DeepMind</h4>
 		            </div>
 				</div>

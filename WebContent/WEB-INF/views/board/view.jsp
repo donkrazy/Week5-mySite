@@ -36,14 +36,13 @@
 								<span style="float: right"><h5>유저이름:
 										${name } 작성일: ${boardVo.regDate } 조회수:
 										${boardVo.hits }</h5></span>
-
 							</div>
 
 						</div>
-							<!-- 이건 안됨
-							<c:set var="newLine" value="'\r\n" scope="page"/>
-							 -->
-							 <%	pageContext.setAttribute("newLine", "\r\n"); %>
+						<% %>
+							<c:set var="newLine" value="
+" scope="page"/>
+						<!-- 이렇게 하니까 됨 -->
 						<div class="panel-body">${fn:replace(boardVo.content, newLine, "<br>") }</div>
 					</div>
 				</div>

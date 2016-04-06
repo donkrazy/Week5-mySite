@@ -1,0 +1,4 @@
+form action="/board" 로 초기화 해야함. 안하면 이전 url parameter 남아있다
+page scope 변수지정할때 \r\n할때 오류있었음. guestbook list.jsp랑 board view.jsp참고
+이메일이 같은사람 회원가입 받지 않기
+이세돌 움짤 직접 serving 안됨

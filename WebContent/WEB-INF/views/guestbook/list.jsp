@@ -46,10 +46,9 @@
 						</thead>
 						<tbody>
 							<c:set var="count" value="${fn:length(list) }" />
-							<!-- 이건 안됨
-							<c:set var="newLine" value="'\r\n" scope="page"/>
-							 -->
-							 <%	pageContext.setAttribute("newLine", "\r\n"); %>
+							<!-- 이렇게 하니까 됨 -->
+							<c:set var="newLine" value="
+"							 scope="page"/>
 							<c:forEach items="${list }" var="vo" varStatus="status">
 								<tr>
 									<th>${count-status.index }</th>
