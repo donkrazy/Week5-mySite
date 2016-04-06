@@ -1,9 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%
-	pageContext.setAttribute("newLine", "\r\n");
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -43,6 +40,10 @@
 							</div>
 
 						</div>
+							<!-- 이건 안됨
+							<c:set var="newLine" value="'\r\n" scope="page"/>
+							 -->
+							 <%	pageContext.setAttribute("newLine", "\r\n"); %>
 						<div class="panel-body">${fn:replace(boardVo.content, newLine, "<br>") }</div>
 					</div>
 				</div>

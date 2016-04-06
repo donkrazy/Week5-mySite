@@ -18,13 +18,10 @@ public class DefaultAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.print(request.getParameter("kwd"));
-//		System.out.print(request.getParameter("page"));
-//		System.out.println(request.getParameter("head"));
 		//초기화
 		int page = 0;
 		int head = 0;
-		int UNITS_PER_PAGE = 3;
+		int UNITS_PER_PAGE = 8; //DAO가서도 수정해야 함
 		String kwd = null;
 		List<BoardVo> list = null;
 		int pageNum;
@@ -74,6 +71,7 @@ public class DefaultAction implements Action {
 		request.setAttribute( "userDao", userDao );
 		request.setAttribute( "starts", starts);
 		request.setAttribute( "ends", ends);
+		request.setAttribute( "pageNum", pageNum);
 		WebUtil.forward( request, response, "/WEB-INF/views/board/list.jsp" );
 	}
 }

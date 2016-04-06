@@ -11,10 +11,10 @@
 <link href="assets/css/dashboard.css" rel="stylesheet">
 <link href="assets/css/footer.css" rel="stylesheet">
 <style type="text/css"></style>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 </head>
-
 <body>
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -29,13 +29,26 @@
 			<c:import url="/WEB-INF/views/include/navigation.jsp">
 				<c:param name="nav" value="main"></c:param>
 			</c:import>
+			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<h1 class="page-header">인공지능의 도전</h1>
+				<div class="row placeholders">
+					<div class="col-xs-6 col-sm-3 ">
+		              <img src="/assets/images/kickscar_profile.jpg" class="img-responsive" alt="alphago" height="200" width="500">
+		              <h4>AlphaGO</h4>
+		            </div>
+		            <div class="col-xs-6 col-sm-3 ">
+		              <img src="/assets/images/sedol.jpg" class="img-responsive" alt="sedol" height="200" width="500">
+		              <h4>Sedol Lee</h4>
+		            </div>
+		            <div class="col-xs-6 col-sm-3 ">
+		              <img src="/assets/images/deepmind.png" class="img-responsive" alt="alphago" height="200" width="500">
+		              <h4>DeepMind</h4>
+		            </div>
+				</div>
+				
+				<h2 class="sub-header">AlphaGo 명예 九단</h2>
 				<div class="content">
-					<img id="profile" width="500"
-						src="/assets/images/kickscar_profile.jpg"> <img width="400"
-						src="/assets/images/sedol.jpg"> <img width="400"
-						src="/assets/images/deepmind.png">
-					<h2>AlphaGo 명예 九단</h2>
 					<div>
 						<p>단 1년 만에 유럽 바둑 챔피언과 세계 최고 수준의 바둑 기사를 꺾은 인공지능 알파벳의 구글 딥마인드에서
 							개발한 컴퓨터 바둑 인공지능 프로그램. 프로기사를 맞바둑으로 최초로 이긴 바둑 프로그램이기도 하다. 이름에서
@@ -95,12 +108,10 @@
 						<a href="/guestbook">방명록</a>에 글 남기기
 					</p>
 				</div>
+				
 			</div>
 		</div>
 	</div>
+	
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.js"></script>
-
 </body>

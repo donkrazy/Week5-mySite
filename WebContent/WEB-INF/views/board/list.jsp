@@ -12,6 +12,8 @@
 <link href="assets/css/bootstrap.css" rel="stylesheet">
 <link href="assets/css/dashboard.css" rel="stylesheet">
 <link href="assets/css/footer.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="assets/js/bootstrap.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -22,29 +24,33 @@
 			<c:import url="/WEB-INF/views/include/header.jsp" />
 		</div>
 	</nav>
+	
 	<div class="container-fluid">
 		<div class="row">
 			<c:import url="/WEB-INF/views/include/navigation.jsp">
 				<c:param name="nav" value="board"></c:param>
 			</c:import>
+			
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div class="content">
-					<font size="20">게시판</font> <span style="float: right"> <c:if
-							test="${authUser == null }">
-							글을 쓰고싶거든 로그인을 해라
-						</c:if> <c:if test="${authUser != null }">
-							<a href="?a=writeform"><button class="btn btn-primary btn-lg">추가</button></a>
-						</c:if>
-					</span>
-
-					<table class="table">
+				<h1 class="page-header">게시판</h1>
+				<div>
+					<form class="navbar-form" method="POST" action="/board?head=${param.head }&page=${param.page }">
+						<div class="form-group">
+							<input placeholder="게시물 검색" class="form-control" type="text" name="kwd" value="${param.kwd }">
+						</div>
+						<button type="submit" class="btn btn-success">Search</button>
+					</form>
+				</div>
+				
+				<div class="table-responsive">
+					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th>제목</th>
 								<th>글쓴이</th>
 								<th>reg_date</th>
 								<th>조회수</th>
-
+	
 							</tr>
 						</thead>
 						<tbody>
@@ -63,19 +69,21 @@
 						</tbody>
 					</table>
 				</div>
-
-				<form class="navbar-form" method="POST" action="/board?head=${param.head }&page=${param.page }">
-					<div class="form-group">
-						<input placeholder="게시물 검색" class="form-control" type="text" name="kwd">
-					</div>
-					<button type="submit" class="btn btn-success">Search</button>
-				</form>
-
+				
+				<div> 
+					<c:if test="${authUser == null }">
+						<a href="/user?a=loginform"><button class="btn btn-primary">글쓰기</button></a>
+					</c:if>
+					 <c:if test="${authUser != null }">
+						<a href="?a=writeform"><button class="btn btn-primary">글쓰기</button></a>
+					</c:if>
+				</div>
+				
 				<div class="pager">
 					<div style="text-align: center;">
 						<nav>
 							<ul class="pagination">
-								<c:if test="${param.head!=0 }">
+								<c:if test="${param.head>=1 }">
 									<li class="page-item"><a class="page-link"
 										href="/board?head=${param.head-1 }" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
@@ -88,23 +96,21 @@
 										href="/board?page=${loop.index }&head=${param.head }&kwd=${param.kwd }">${loop.index }</a>
 									</li>
 								</c:forEach>
-								<c:if test="${param.head%5 ==0 }">
-									<li class="page-item"><a class="page-link"
-										href="/board?head=${param.head+1 }&kwd=${param.kwd }" aria-label="Next"> <span
-											aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
-									</a></li>
+								<c:if test="${pageNum > 5 && ends%5 == 0}">
+									<li class="page-item">
+										<a class="page-link" href="/board?head=${param.head+1 }&kwd=${param.kwd }" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
+										</a>
+									</li>
 								</c:if>
 							</ul>
 						</nav>
 					</div>
 				</div>
-
+				
 			</div>
 		</div>
 	</div>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.js"></script>
 </body>
 </html>

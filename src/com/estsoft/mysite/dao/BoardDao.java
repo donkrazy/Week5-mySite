@@ -212,7 +212,7 @@ public class BoardDao {
 	}
 
 	public List<BoardVo> getList(int page) {
-		int UNITS_PER_PAGE = 3;
+		int UNITS_PER_PAGE = 8;
 		List<BoardVo> list = new ArrayList<BoardVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -259,7 +259,7 @@ public class BoardDao {
 	}
 	
 	public List<BoardVo> getList(int page, String kwd) {
-		int UNITS_PER_PAGE = 3;
+		int UNITS_PER_PAGE = 8;
 		List<BoardVo> list = new ArrayList<BoardVo>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
